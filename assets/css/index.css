@@ -52,15 +52,58 @@ label {
     background-color: white;
 }
 
-input:focus + label {
-    top: -0.5em;
-    color: black;
-    background-color: white;
-    transform: scale(0.8);
-    transform-origin: left;
+.gray-label {
+    color: #999;
 }
 
-button {
+input:focus + label,
+.up {
+  top: -0.5em;
+  color: black;
+  background-color: white;
+  transform: scale(0.8);
+  transform-origin: left;
+}
+
+input[type="password"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+input:focus + label + .login-container {
+    background-color: #0056b3; /* Cor de fundo quando o input está em foco */
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 1.3em;
+    font-size: 24px;
+    transform: translateY(-40%);
+    background-color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: none; /* Esconde o botão inicialmente */
+}
+
+input:not(:focus) + label,
+#password:not(:focus) + label + .toggle-password #eye-icon {
+    color: gray;
+}
+
+input:focus + label + .toggle-password,
+.up + .toggle-password {
+    display: inline; /* Mostra o botão quando o input tem foco ou conteúdo */
+}
+
+.submit {
     padding: 10px;
     background-color: #007bff;
     color: white;
@@ -70,6 +113,6 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.submit:hover {
     background-color: #0056b3;
 }
