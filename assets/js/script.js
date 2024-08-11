@@ -26,19 +26,32 @@ function withContent() {
  * Limpa todos os campos de entrada ao carregar a página.
  * 
  * Esta função é executada automaticamente ao carregar a página, garantindo que os campos de entrada
- * do formulário estejam vazios e os rótulos (labels) estejam na posição inicial.
+ * do formulário estejam vazios, os rótulos (labels) estejam na posição inicial,
+ * e o ícone de visibilidade da senha seja redefinido.
  * 
  * @function clearInputs
  */
 function clearInputs() {
     const inputs = document.querySelectorAll('input'); // Seleciona todos os elementos <input> na página
+    const eyeIcon = document.getElementById('eye-icon'); // Seleciona o ícone de visibilidade da senha
+    const passwordInput = document.getElementById('password'); // Seleciona o campo de senha
 
     inputs.forEach(input => {
         input.value = ''; // Limpa o valor do input
         const label = input.nextElementSibling; // Seleciona o próximo elemento irmão, que é o <label>
         label.classList.remove('up'); // Remove a classe 'up' para resetar a posição do label
     });
+
+    // Reinicia o ícone de visibilidade da senha e define o campo como tipo 'password'
+    if (eyeIcon && passwordInput) {
+        passwordInput.type = 'password'; // Define o campo como tipo 'password'
+        eyeIcon.setAttribute('name', 'eye-off-outline'); // Define o ícone como 'ocultar senha'
+    }
 }
+
+// Executa a função ao carregar a página
+window.onload = clearInputs;
+
 
 /**
  * Adiciona eventos ao campo de senha e botão de visibilidade ao carregar o DOM.
