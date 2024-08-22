@@ -23,13 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response && response.status >= 400 && response.status <= 499) {
                     showModal('Acesso não autorizado');
                 } else if (response && response.status >= 200 && response.status <= 299) {
-                    // Armazena o token no cookie do navegador
-                    document.cookie = `authToken=${response.token}; path=/;`;
+                    response.json().then(data => {
+                        // Armazena o token JWT no localStorage
+                        localStorage.setItem('authToken', data.token);
+                        showModal('Login bem-sucedido!');
+                        // Redirecione para a próxima página ou faça algo com o token
+                    });
                 } else if (response && response.status >= 500 && response.status <= 599) {
                     showModal('Erro no servidor: ' + response.status);
                 } else {
                     showModal('Erro desconhecido. Status code: ' + (response ? response.status : 'sem status'));
                 }
+            });
+        } else {
+            showModal("Preencha todos os campos.");
+        }
             });
         } else {
             showModal("Erro");
